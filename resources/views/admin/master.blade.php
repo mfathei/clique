@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- 
+<!--
 Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 3.3.5
 Version: 4.1.0
 Author: KeenThemes
@@ -29,27 +29,30 @@ License: You must have a valid license purchased only from themeforest(the above
     <!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
     <!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
     <body class="page-header-fixed page-sidebar-closed-hide-logo">
-        <!-- BEGIN HEADER -->
-        @include('admin.nav')
-        <!-- END HEADER -->
-        <div class="clearfix">
+        <div id="app">
+            <!-- BEGIN HEADER -->
+            @include('admin.nav')
+            <!-- END HEADER -->
+            <div class="clearfix">
+            </div>
+            <!-- BEGIN CONTAINER -->
+            <div class="page-container">
+                <!-- BEGIN SIDEBAR -->
+                @include('admin.side')
+                <!-- END SIDEBAR -->
+                <!-- BEGIN CONTENT -->
+                @yield('contents')
+                <!-- END CONTENT -->
+            </div>
+            <!-- END CONTAINER -->
+            <!-- BEGIN FOOTER -->
+            @include('admin.footer')
+            <!-- END FOOTER -->
+            <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+            <!-- END JAVASCRIPTS -->
         </div>
-        <!-- BEGIN CONTAINER -->
-        <div class="page-container">
-            <!-- BEGIN SIDEBAR -->
-            @include('admin.side')
-            <!-- END SIDEBAR -->
-            <!-- BEGIN CONTENT -->
-            @yield('contents')
-            <!-- END CONTENT -->
-        </div>
-        <!-- END CONTAINER -->
-        <!-- BEGIN FOOTER -->
-        @include('admin.footer')
-        <!-- END FOOTER -->
-        <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
         @include('admin.foot')
-        <!-- END JAVASCRIPTS -->
+        @yield('scripts')
     </body>
     <!-- END BODY -->
 </html>

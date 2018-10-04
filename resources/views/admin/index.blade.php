@@ -144,9 +144,23 @@
         <div class="row">
             <div class="col-md-12">
                 Page content goes here
+                <component :is="currentComponent"></component>
             </div>
         </div>
         <!-- END PAGE CONTENT-->
     </div>
 </div>
+@endsection
+@section('scripts')
+    <script>
+        // import example-component from './components/ExampleComponent.vue';
+        const vu = new Vue({
+            el: '#app',
+            data(){
+                return {
+                    currentComponent: 'example-component'
+                };
+            },
+        });
+    </script>
 @endsection
