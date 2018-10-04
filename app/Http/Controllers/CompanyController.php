@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Company;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+    protected $repo;
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Company $company)
     {
         $this->middleware('auth');
+        $this->repo = new Repository($company);
     }
     
     /**

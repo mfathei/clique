@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
 {
+    protected $repo;
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Location $location)
     {
         $this->middleware('auth');
+        $this->repo = new Repository($location);
     }
     
     /**

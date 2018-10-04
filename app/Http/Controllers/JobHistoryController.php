@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\JobHistory;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
 class JobHistoryController extends Controller
 {
+    protected $repo;
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(JobHistory $jobHistory)
     {
         $this->middleware('auth');
+        $this->repo = new Repository($jobHistory);
     }
 
     /**

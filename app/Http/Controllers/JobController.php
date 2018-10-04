@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+    protected $repo;
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Job $job)
     {
         $this->middleware('auth');
+        $this->repo = new Repository($job);
     }
 
     /**

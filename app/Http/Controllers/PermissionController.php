@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Permission;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
+    protected $repo;
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Permission $permission)
     {
         $this->middleware('auth');
+        $this->repo = new Repository($permission);
     }
 
     /**

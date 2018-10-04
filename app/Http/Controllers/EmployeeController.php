@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
+    protected $repo;
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Employee $emp)
     {
         $this->middleware('auth');
+        $this->repo = new Repository($emp);
     }
 
     /**

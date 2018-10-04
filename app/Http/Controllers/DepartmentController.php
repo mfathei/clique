@@ -3,16 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Department;
+use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
 class DepartmentController extends Controller
 {
+    protected $repo;
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct(Department $dept)
     {
         $this->middleware('auth');
+        $this->repo = new Repository($dept);
     }
 
     /**
