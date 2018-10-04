@@ -143,8 +143,14 @@
         <!-- BEGIN PAGE CONTENT-->
         <div class="row">
             <div class="col-md-12">
+                <div>
+                    <a href="#" @click="showEmployees">Employees</a>
+                    <a href="#" @click="showExample">Example</a>
+                </div>
                 Page content goes here
-                <component :is="currentComponent"></component>
+                <keep-alive>
+                    <component :is="currentComponent"></component>
+                </keep-alive>
             </div>
         </div>
         <!-- END PAGE CONTENT-->
@@ -158,9 +164,23 @@
             el: '#app',
             data(){
                 return {
-                    currentComponent: 'example-component'
+                    currentComponent: 'employees-component'
                 };
             },
+            methods:{
+                showEmployees: function(e){
+                    e.preventDefault();
+                    this.currentComponent = 'employees-component';
+                },
+                showExample: function(e){
+                    e.preventDefault();
+                    this.currentComponent = 'example-component';
+                },
+                showLogin: function(e){
+                    e.preventDefault();
+                    this.currentComponent = 'login-component';
+                }
+            }
         });
     </script>
 @endsection
