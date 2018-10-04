@@ -23,9 +23,8 @@ class CreateEmployeesTable extends Migration
             $table->double('salary');
             $table->float('commission_pct')->default(0);
             $table->unsignedInteger('job_id');
-            $table->unsignedInteger('manager_id');
+            $table->unsignedInteger('manager_id')->nullable();
             $table->unsignedInteger('department_id');
-            $table->unsignedInteger('role_id');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

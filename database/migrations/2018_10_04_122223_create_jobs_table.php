@@ -15,6 +15,7 @@ class CreateJobsTable extends Migration
     {
         Schema::create('jobs', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code');
             $table->string('title');
             $table->double('min_salary');
             $table->double('max_salary');
