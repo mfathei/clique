@@ -2,10 +2,10 @@
 
 This is a simple HR app
 
-To run it follow these steps:
-1- Create a database and set its name in .env file
-2- Run this `composer update`
-3- `npm install`
-4- `npm run dev`
-5- `php artisan migrate`
-6- `php artisan db:seed`
+To run it follow these steps:<br>
+1- Create a database and set its name in .env file<br>
+2- Run this `composer update`<br>
+3- `npm install`<br>
+4- `npm run dev`<br>
+5- `php artisan migrate`<br>
+6- `php artisan db:seed`<br>
