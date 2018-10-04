@@ -18,7 +18,7 @@ class CreateLocationsTable extends Migration
             $table->string('street_address');
             $table->string('postal_code');
             $table->string('city');
-            $table->string('state_province');
+            $table->string('state_province')->nullable();
             $table->unsignedInteger('country_id');
             $table->timestamps();
 
