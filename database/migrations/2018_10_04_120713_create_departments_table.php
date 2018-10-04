@@ -22,7 +22,7 @@ class CreateDepartmentsTable extends Migration
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('manager_id')->references('id')->on('employees');
+            // $table->foreign('manager_id')->references('id')->on('employees');
             $table->foreign('location_id')->references('id')->on('locations');
         });
     }

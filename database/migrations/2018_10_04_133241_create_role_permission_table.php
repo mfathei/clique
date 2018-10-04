@@ -19,8 +19,8 @@ class CreateRolePermissionTable extends Migration
             $table->unsignedInteger('permission_id');
             $table->timestamps();
 
-            $this->foreign('role_id')->references('id')->on('roles');
-            $this->foreign('permission_id')->references('id')->on('permissions');
+            $table->foreign('role_id')->references('id')->on('roles');
+            $table->foreign('permission_id')->references('id')->on('permissions');
         });
     }
 

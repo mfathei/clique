@@ -21,7 +21,7 @@ class CreateCompaniesTable extends Migration
             $table->unsignedInteger('location_id');
             $table->timestamps();
 
-            $table->foreign('manager_id')->references('id')->on('employees');
+            // $table->foreign('manager_id')->references('id')->on('employees');
             $table->foreign('location_id')->references('id')->on('locations');
         });
     }
