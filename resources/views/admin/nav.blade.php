@@ -407,7 +407,10 @@
                                     <i class="icon-lock"></i> Lock Screen </a>
                             </li>
                             <li>
-                                <a href="login.html">
+                                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                                {{ csrf_field() }}
+                                </form>
+                                <a href="#" title="Log Out" onclick="document.querySelector('#logoutForm').submit();">
                                     <i class="icon-key"></i> Log Out </a>
                             </li>
                         </ul>
