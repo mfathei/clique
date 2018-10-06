@@ -1,5 +1,7 @@
 const MYJS = (function () {
 
+    let token;
+
     function activateSideMenu(menu, submenu) {
         document.querySelectorAll('ul.page-sidebar-menu>li').forEach(function(item){
             item.classList.remove('active', 'open');
@@ -11,7 +13,17 @@ const MYJS = (function () {
         submenuitem.classList.add('active');
     };
 
+    function setToken(token){
+        this.token = token;
+    }
+
+    function getToken(){
+        return this.token;
+    }
+
     return {
+        setToken: setToken,
+        getToken: getToken,
         activateSideMenu: activateSideMenu
     };
 })();

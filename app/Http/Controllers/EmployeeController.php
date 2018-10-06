@@ -37,7 +37,7 @@ class EmployeeController extends ApiController
      */
     public function ajax(Request $request)
     {
-        $columns = ['id', 'first_name', 'last_name'];
+        $columns = ['id', 'first_name', 'last_name', 'created_at'];
         $limit = $request->length;
         $offset = $request->start;
         $search = $request->search['value'];
@@ -104,7 +104,7 @@ class EmployeeController extends ApiController
      */
     public function show(Employee $employee)
     {
-        //
+        dd($employee);
     }
 
     /**
@@ -115,7 +115,7 @@ class EmployeeController extends ApiController
      */
     public function edit(Employee $employee)
     {
-        //
+        dd($employee);
     }
 
     /**
@@ -138,6 +138,6 @@ class EmployeeController extends ApiController
      */
     public function destroy(Employee $employee)
     {
-        //
+        dd($employee);
     }
 }

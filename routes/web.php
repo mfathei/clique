@@ -18,6 +18,9 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/employees', 'EmployeeController@index')->name('employees.index');
     Route::post('/employees/ajax', 'EmployeeController@ajax')->name('employees.ajax');
+    Route::get('/employees/{employee}', 'EmployeeController@show')->name('employees.show');
+    Route::post('/employees/{employee}/edit', 'EmployeeController@edit')->name('employees.edit');
+    Route::delete('/employees/{employee}/delete', 'EmployeeController@destroy')->name('employees.delete');
 });
 
 

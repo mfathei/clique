@@ -61,6 +61,7 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                     </table>
@@ -74,6 +75,7 @@
 @section('scripts')
     <script>
         MYJS.activateSideMenu('employees', 'employees-dashboard');
+        MYJS.setToken('{!! csrf_token() !!}');
         $(document).ready(function(){
             var empDatatable = $('#employees-table').DataTable({
                 processing: true,
@@ -81,7 +83,7 @@
                 ajax: {
                     url: '{!! route('employees.ajax') !!}',
                     data: {
-                        _token: '{!! csrf_token() !!}'
+                        _token: MYJS.getToken(),
                     },
                     type: 'POST',
                     error: function(){
@@ -89,7 +91,27 @@
                         $("#employees-table").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
                         $("#employees-table_processing").css("display","none");
                     }
-                }
+                },
+                columnDefs: [
+                    {
+                        targets: -1,
+                        sortable: false,
+                        render: function(data, type, row){
+                            return `
+                                <a href="/employees/${row[0]}" title="View employee"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                <form class="hidden" id="form${row[0]}" method="post" action="/employees/${row[0]}/edit">
+                                    <input type="hidden" name="_token" value="${MYJS.getToken()}">
+                                </form>
+                                &nbsp;<a href="javascript: document.querySelector('#form${row[0]}').submit();" title="Edit employee"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <form class="hidden" id="formdelete${row[0]}" method="post" action="/employees/${row[0]}/delete">
+                                    <input type="hidden" name="_token" value="${MYJS.getToken()}">
+                                    <input type="hidden" name="_method" value="delete">
+                                </form>
+                                &nbsp;<a href="javascript: if(confirm('Are you sure delete employee ${row[0]} ?')){document.querySelector('#formdelete${row[0]}').submit();};" title="Delete employee"><i style="color: red" class="fa fa-times" aria-hidden="true"></i></a>
+                                `;
+                        }
+                    }
+                ]
             });
         });
     </script>
