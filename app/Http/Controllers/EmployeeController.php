@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Api\ApiController;
 use App\Models\Employee;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
+class EmployeeController extends ApiController
 {
     protected $repo;
     /**
@@ -25,7 +26,47 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        // $emps = $this->repo->all(['first_name', 'last_name']);
+        // dd($emps);
+        return view('admin.employees.index');
+    }
+
+    /**
+     * @return Employees in ajax format for DataTable plugin.
+     */
+    public function ajax(Request $request)
+    {
+        $columns = ['id', 'first_name', 'last_name'];
+        $limit = isset($request->length)? $request->length: 10;
+        $offset = isset($request->start)? $request->start: 0;
+        if (isset($request->order[0]['column'])) {
+            $emps = $this->repo->allWithOrder($columns, [$columns[$request->order[0]['column']], $request->order[0]['dir']]);
+        } else {
+            $emps = $this->repo->all($columns);
+        }
+        // Get total records before apply limit
+        $count = $emps->count();
+        // Apply limit and offset
+        $emps = $emps->splice($offset, $limit);
+
+        $data = [];
+        foreach ($emps as $key => $item) {
+            $data[] = array_values($item->toArray());
+        }
+        $draw = intval($request->draw);
+        $recordsTotal = $count;
+        $recordsFiltered = $recordsTotal;
+        $json_data = [
+            'draw' => $draw,
+            'recordsTotal' => $recordsTotal,
+            'recordsFiltered' => $recordsFiltered,
+            'data' => $data
+        ];
+
+        if ($recordsFiltered) {
+            return $this->respond($json_data);
+        }
+        return $this->setStatusCode(404)->respondWithErrors(['No Data Found']);
     }
 
     /**

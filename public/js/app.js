@@ -1076,7 +1076,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(11);
-module.exports = __webpack_require__(44);
+module.exports = __webpack_require__(45);
 
 
 /***/ }),
@@ -1112,6 +1112,10 @@ Vue.component('login-component', __webpack_require__(41));
 //         };
 //     },
 // });
+
+__webpack_require__(44);
+
+// const MYJS = new publicModule();
 
 /***/ }),
 /* 12 */
@@ -13794,6 +13798,22 @@ if (false) {
 
 /***/ }),
 /* 44 */
+/***/ (function(module, exports) {
+
+var MYJS = function () {
+
+    function activateSideMenu(menu) {
+        document.querySelectorAll('ul.page-sidebar-menu>li').classList.remove('active', 'open');
+        document.querySelector('#' + menu).classList.add('active', 'open');
+    };
+
+    return {
+        activateSideMenu: activateSideMenu
+    };
+}();
+
+/***/ }),
+/* 45 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

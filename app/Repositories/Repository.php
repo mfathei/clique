@@ -16,9 +16,27 @@ class Repository implements RepositoryInterface
     }
 
     // Get all instances of model
-    public function all()
+    public function all(array $columns = ['*'])
     {
-        return $this->model->all();
+        return $this->model->all($columns);
+    }
+
+    // Get all instances of model with limit
+    public function allWithLimit($limit, $start, array $columns = ['*'])
+    {
+        return $this->model->limit($limit, $start)->get($columns);
+    }
+
+    // Get all instances of model with order
+    public function allWithOrder(array $columns = ['*'], array $orderBy = [])
+    {
+        return $this->model->orderBy($orderBy[0], $orderBy[1])->get($columns);
+    }
+
+    // Get all instances of model with order and limit
+    public function allWithOrderAndLimit($limit, $start, array $columns = ['*'], array $orderBy = [])
+    {
+        return $this->model->orderBy($orderBy[0], $orderBy[1])->limit($limit, $start)->get($columns);
     }
 
     // Create a new record in the database

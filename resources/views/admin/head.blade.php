@@ -11,5 +11,6 @@
 <link href="{{ url("admin/assets/admin/layout4/css/layout.css") }}" rel="stylesheet" type="text/css"/>
 <link id="style_color" href="{{ url("admin/assets/admin/layout4/css/themes/light.css") }}" rel="stylesheet" type="text/css"/>
 <link href="{{ url("admin/assets/admin/layout4/css/custom.css") }}" rel="stylesheet" type="text/css"/>
+<link href="{{ url("css/dataTables/jquery.dataTables.min.css") }}" rel="stylesheet" type="text/css"/>
 <!-- Styles -->
 <link href="{{ asset('css/app.css') }}" rel="stylesheet">

@@ -11,9 +11,16 @@
 |
 */
 
-Route::middleware('auth')->get('/', function () {
-    return view('admin.index');
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return view('admin.index');
+    })->name('/');
+
+    Route::get('/employees', 'EmployeeController@index')->name('employees.index');
+    Route::post('/employees/ajax', 'EmployeeController@ajax')->name('employees.ajax');
 });
+
+
 
 Auth::routes();
 

@@ -2,7 +2,7 @@
 <!-- BEGIN CORE PLUGINS -->
 <!--[if lt IE 9]>
 <script src="{{ url("admin/assets/global/plugins/respond.min.js") }}"></script>
-<script src="{{ url("admin/assets/global/plugins/excanvas.min.js") }}"></script> 
+<script src="{{ url("admin/assets/global/plugins/excanvas.min.js") }}"></script>
 <![endif]-->
 <script src="{{ url("admin/assets/global/plugins/jquery.min.js") }}" type="text/javascript"></script>
 <script src="{{ url("admin/assets/global/plugins/jquery-migrate.min.js") }}" type="text/javascript"></script>
@@ -26,5 +26,7 @@
         Demo.init(); // init demo features
     });
 </script>
+<script src="{{ url("js/dataTables/jquery.dataTables.min.js") }}" type="text/javascript"></script>
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}" ></script>
+<script src="{{ asset('js/functions.js') }}" ></script>

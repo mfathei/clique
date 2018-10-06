@@ -122,99 +122,129 @@ class EmployeesSeeder extends Seeder
         $emp->roles()->detach();
         $emp->roles()->attach(Role::where('name', 'employee')->first()->id);
 
+        $emp = Employee::create([
+            'first_name' => 'Valli',
+            'last_name' => 'Pataballa',
+            'phone_number' => '590.423.4560',
+            'email' => 'VPATABAL',
+            'hire_date' => '1998-9-5',
+            'salary' => 4800,
+            'commission_pct' => 0,
+            'job_id' => Job::where('code', 'IT_PROG')->first()->id,
+            'manager_id' => 2,
+            'department_id' => 3,
+            'password' => Hash::make('password'),
+        ]);
+
+        $emp->roles()->detach();
+        $emp->roles()->attach(Role::where('name', 'employee')->first()->id);
+
+        $emp = Employee::create([
+            'first_name' => 'Diana',
+            'last_name' => 'Lorentz',
+            'phone_number' => '590.423.5567',
+            'email' => 'DLORENTZ',
+            'hire_date' => '1999-2-5',
+            'salary' => 4200,
+            'commission_pct' => 0,
+            'job_id' => Job::where('code', 'IT_PROG')->first()->id,
+            'manager_id' => 2,
+            'department_id' => 3,
+            'password' => Hash::make('password'),
+        ]);
+
+        $emp->roles()->detach();
+        $emp->roles()->attach(Role::where('name', 'employee')->first()->id);
+
+        $emp = Employee::create([
+            'first_name' => 'Nancy',
+            'last_name' => 'Greenberg',
+            'phone_number' => '515.124.4569',
+            'email' => 'NGREENBE',
+            'hire_date' => '1994-8-17',
+            'salary' => 12000,
+            'commission_pct' => 0,
+            'job_id' => Job::where('code', 'FI_MGR')->first()->id,
+            'manager_id' => 1,
+            'department_id' => 3,
+            'password' => Hash::make('password'),
+        ]);
+
+        $emp->roles()->detach();
+        $emp->roles()->attach(Role::where('name', 'employee')->first()->id);
+
+      $emp = Employee::create([
+            'first_name' => 'Daniel',
+            'last_name' => 'Faviet',
+            'phone_number' => '515.124.4169',
+            'email' => 'DFAVIET',
+            'hire_date' => '1994-8-16',
+            'salary' => 9000,
+            'commission_pct' => 0,
+            'job_id' => Job::where('code', 'FI_MGR')->first()->id,
+            'manager_id' => 1,
+            'department_id' => 3,
+            'password' => Hash::make('password'),
+        ]);
+
+        $emp->roles()->detach();
+        $emp->roles()->attach(Role::where('name', 'employee')->first()->id);
+
+      $emp = Employee::create([
+            'first_name' => 'John',
+            'last_name' => 'Chen',
+            'phone_number' => '515.124.4269',
+            'email' => 'JCHEN',
+            'hire_date' => '1997-9-28',
+            'salary' => 8200,
+            'commission_pct' => 0,
+            'job_id' => Job::where('code', 'FI_ACCOUNT')->first()->id,
+            'manager_id' => 1,
+            'department_id' => 3,
+            'password' => Hash::make('password'),
+        ]);
+
+        $emp->roles()->detach();
+        $emp->roles()->attach(Role::where('name', 'employee')->first()->id);
+
+
+      $emp = Employee::create([
+            'first_name' => 'Ismael',
+            'last_name' => 'Sciarra',
+            'phone_number' => '515.124.4369',
+            'email' => 'ISCIARRA',
+            'hire_date' => '1997-9-30',
+            'salary' => 7700,
+            'commission_pct' => 0,
+            'job_id' => Job::where('code', 'FI_ACCOUNT')->first()->id,
+            'manager_id' => 1,
+            'department_id' => 3,
+            'password' => Hash::make('password'),
+        ]);
+
+        $emp->roles()->detach();
+        $emp->roles()->attach(Role::where('name', 'employee')->first()->id);
+
+      $emp = Employee::create([
+            'first_name' => 'Jose Manuel',
+            'last_name' => 'Urman',
+            'phone_number' => '515.124.4469',
+            'email' => 'JMURMAN',
+            'hire_date' => '1998-3-7',
+            'salary' => 7800,
+            'commission_pct' => 0,
+            'job_id' => Job::where('code', 'FI_ACCOUNT')->first()->id,
+            'manager_id' => 1,
+            'department_id' => 3,
+            'password' => Hash::make('password'),
+        ]);
+
+        $emp->roles()->detach();
+        $emp->roles()->attach(Role::where('name', 'employee')->first()->id);
+
+
         /**
-        
-        INSERT INTO employees VALUES(
-            106,
-            'Valli',
-            'Pataballa',
-            'VPATABAL',
-            '590.423.4560',
-            TO_DATE('05-FEB-1998', 'dd-MON-yyyy'),
-            'IT_PROG',
-            4800,
-            null,
-            103,
-            60
-        );
-        INSERT INTO employees VALUES(
-            107,
-            'Diana',
-            'Lorentz',
-            'DLORENTZ',
-            '590.423.5567',
-            TO_DATE('07-FEB-1999', 'dd-MON-yyyy'),
-            'IT_PROG',
-            4200,
-            null,
-            103,
-            60
-        );
-        INSERT INTO employees VALUES(
-            108,
-            'Nancy',
-            'Greenberg',
-            'NGREENBE',
-            '515.124.4569',
-            TO_DATE('17-AUG-1994', 'dd-MON-yyyy'),
-            'FI_MGR',
-            12000,
-            null,
-            101,
-            100
-        );
-        INSERT INTO employees VALUES(
-            109,
-            'Daniel',
-            'Faviet',
-            'DFAVIET',
-            '515.124.4169',
-            TO_DATE('16-AUG-1994', 'dd-MON-yyyy'),
-            'FI_ACCOUNT',
-            9000,
-            null,
-            108,
-            100
-        );
-        INSERT INTO employees VALUES(
-            110,
-            'John',
-            'Chen',
-            'JCHEN',
-            '515.124.4269',
-            TO_DATE('28-SEP-1997', 'dd-MON-yyyy'),
-            'FI_ACCOUNT',
-            8200,
-            null,
-            108,
-            100
-        );
-        INSERT INTO employees VALUES(
-            111,
-            'Ismael',
-            'Sciarra',
-            'ISCIARRA',
-            '515.124.4369',
-            TO_DATE('30-SEP-1997', 'dd-MON-yyyy'),
-            'FI_ACCOUNT',
-            7700,
-            null,
-            108,
-            100
-        );
-        INSERT INTO employees VALUES(
-            112,
-            'Jose Manuel',
-            'Urman',
-            'JMURMAN',
-            '515.124.4469',
-            TO_DATE('07-MAR-1998', 'dd-MON-yyyy'),
-            'FI_ACCOUNT',
-            7800,
-            null,
-            108,
-            100
-        );
+
         INSERT INTO employees VALUES(
             113,
             'Luis',

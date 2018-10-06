@@ -11,20 +11,20 @@
         <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
         <ul class="page-sidebar-menu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
             <li class="start active open">
-                <a href="#">
+                <a href="{{ route('/') }}">
                     <i class="icon-home"></i>
                     <span class="title">Dashboard</span>
                 </a>
             </li>
-            <li>
+            <li id="employees">
                 <a href="javascript:;">
-                    <i class="icon-basket"></i>
-                    <span class="title">eCommerce</span>
+                    <i class="icon-user"></i>
+                    <span class="title">Employees</span>
                     <span class="arrow "></span>
                 </a>
                 <ul class="sub-menu">
-                    <li>
-                        <a href="ecommerce_index.html">
+                    <li id="employees-dashboard">
+                        <a href="{{ route('employees.index') }}">
                             <i class="icon-home"></i>
                             Dashboard</a>
                     </li>
