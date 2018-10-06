@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ApiController;
 use App\Models\Employee;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
+use DB;
 
 class EmployeeController extends ApiController
 {
@@ -37,13 +38,19 @@ class EmployeeController extends ApiController
     public function ajax(Request $request)
     {
         $columns = ['id', 'first_name', 'last_name'];
-        $limit = isset($request->length)? $request->length: 10;
-        $offset = isset($request->start)? $request->start: 0;
-        if (isset($request->order[0]['column'])) {
-            $emps = $this->repo->allWithOrder($columns, [$columns[$request->order[0]['column']], $request->order[0]['dir']]);
+        $limit = $request->length;
+        $offset = $request->start;
+        $search = $request->search['value'];
+        $draw = intval($request->draw);
+
+        $where = [];
+        if ($search !== null) {
+            $emps = $this->repo->allWithOrderAndWhere($search, $columns, [$columns[$request->order[0]['column']], $request->order[0]['dir']]);
         } else {
-            $emps = $this->repo->all($columns);
+            $emps = $this->repo->allWithOrder($columns, [$columns[$request->order[0]['column']], $request->order[0]['dir']]);
         }
+        // dd(DB::getQueryLog());
+
         // Get total records before apply limit
         $count = $emps->count();
         // Apply limit and offset
@@ -53,7 +60,6 @@ class EmployeeController extends ApiController
         foreach ($emps as $key => $item) {
             $data[] = array_values($item->toArray());
         }
-        $draw = intval($request->draw);
         $recordsTotal = $count;
         $recordsFiltered = $recordsTotal;
         $json_data = [
