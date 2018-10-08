@@ -4,28 +4,6 @@
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
         <div class="page-content">
-            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
-            <div class="modal fade" id="portlet-config" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                            <h4 class="modal-title">Modal title</h4>
-                        </div>
-                        <div class="modal-body">
-                             Widget settings form goes here
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn blue">Save changes</button>
-                            <button type="button" class="btn default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-            <!-- /.modal -->
-            <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
             <!-- BEGIN PAGE HEADER-->
             <!-- BEGIN PAGE HEAD -->
             <div class="page-head">
@@ -51,6 +29,9 @@
                 </li>
             </ul>
             <!-- END PAGE BREADCRUMB -->
+            <div class="pull-right" style="margin-bottom: 5px;">
+                <a class="btn btn-primary" href="{{ route('employees.create') }}" title="Create New Employee">Add Employee</a>
+            </div>
             <!-- END PAGE HEADER-->
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
@@ -61,6 +42,7 @@
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
+                                <th>Department</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -76,12 +58,42 @@
     <script>
         MYJS.activateSideMenu('employees', 'employees-dashboard');
         MYJS.setToken('{!! csrf_token() !!}');
+        function deleteEmployee(id){
+            var empsUrl = '{!! route("employees.index") !!}';
+            var url = empsUrl + '/' + id + '/delete';
+            axios.delete(url, {
+                method: 'delete',
+            })
+            .then(function(res){
+                console.log(res);
+                MYJS.empDatatable.ajax.reload();// refresh datatable
+                swal('Deleted', 'Employee Deleted Successfully!', 'success');
+
+            })
+            .catch(function(err){
+                swal('Oops!', 'Something went wrong!', 'error');
+            });
+        }
+
+        function confirmDelete(id){
+            swal({
+                title: 'Delete employee ' + id,
+                text: 'Are you sure delete employee ' + id + ' ?',
+                icon: 'warning',
+                dangerMode: true
+            })
+            .then(willDelete => {
+                if(willDelete){
+                    deleteEmployee(id);
+                }
+            })
+        }
         $(document).ready(function(){
-            var empDatatable = $('#employees-table').DataTable({
+            MYJS.empDatatable = $('#employees-table').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{!! route('employees.ajax') !!}',
+                    url: '{!! route("employees.ajax") !!}',
                     data: {
                         _token: MYJS.getToken(),
                     },
@@ -103,11 +115,7 @@
                                     <input type="hidden" name="_token" value="${MYJS.getToken()}">
                                 </form>
                                 &nbsp;<a href="javascript: document.querySelector('#form${row[0]}').submit();" title="Edit employee"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                <form class="hidden" id="formdelete${row[0]}" method="post" action="/employees/${row[0]}/delete">
-                                    <input type="hidden" name="_token" value="${MYJS.getToken()}">
-                                    <input type="hidden" name="_method" value="delete">
-                                </form>
-                                &nbsp;<a href="javascript: if(confirm('Are you sure delete employee ${row[0]} ?')){document.querySelector('#formdelete${row[0]}').submit();};" title="Delete employee"><i style="color: red" class="fa fa-times" aria-hidden="true"></i></a>
+                                &nbsp;<a href="javascript: confirmDelete('${row[0]}');" title="Delete employee"><i style="color: red" class="fa fa-times" aria-hidden="true"></i></a>
                                 `;
                         }
                     }

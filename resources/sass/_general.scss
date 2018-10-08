@@ -4,3 +4,7 @@
     min-height: 75px;
     margin: auto !important;
 }
+
+#employees-table_filter > label > input[type="search"] {
+    max-height: 25px;
+}

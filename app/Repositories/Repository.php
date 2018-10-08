@@ -32,6 +32,7 @@ class Repository implements RepositoryInterface
     // Get all instances of model with order
     public function allWithOrder(array $columns = ['*'], array $orderBy = [])
     {
+        // Note in columns u need id for relations so u can get it like to get $item->department u need department_id u will
         return $this->model->orderBy($orderBy[0], $orderBy[1])->get($columns);
     }
 
@@ -44,7 +45,7 @@ class Repository implements RepositoryInterface
     // Get all instances of model with order and where
     public function allWithOrderAndWhere(string $search, array $columns = ['*'], array $orderBy = [])
     {
-        $query = $this->model->query();
+        $query = $this->model;
         foreach ($columns as $key => $column) {
             $query = $query->orWhere($column, 'LIKE', "%$search%");
         }
@@ -91,6 +92,7 @@ class Repository implements RepositoryInterface
     // Eager load database relations
     public function with($relations)
     {
-        return $this->model->with($relations);
+        $this->model = $this->model->with($relations);
+        return $this;
     }
 }

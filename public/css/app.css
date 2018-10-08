@@ -5,6 +5,10 @@
   margin: auto !important;
 }
 
+#employees-table_filter > label > input[type="search"] {
+  max-height: 25px;
+}
+
 .navbar-laravel {
   background-color: #fff;
   -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);

@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Api\ApiController;
+use Validator;
+use DB;
 use App\Models\Employee;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
-use DB;
 
 class EmployeeController extends ApiController
 {
@@ -37,19 +38,20 @@ class EmployeeController extends ApiController
      */
     public function ajax(Request $request)
     {
-        $columns = ['id', 'first_name', 'last_name', 'created_at'];
+        // Note: we need department_id to load $item->department relation
+        $columns = ['id', 'first_name', 'last_name', 'department_id'];
         $limit = $request->length;
         $offset = $request->start;
         $search = $request->search['value'];
         $draw = intval($request->draw);
-
         $where = [];
         if ($search !== null) {
-            $emps = $this->repo->allWithOrderAndWhere($search, $columns, [$columns[$request->order[0]['column']], $request->order[0]['dir']]);
+            $emps = $this->repo->with(['department'])->allWithOrderAndWhere($search, $columns, [$columns[$request->order[0]['column']], $request->order[0]['dir']]);
         } else {
-            $emps = $this->repo->allWithOrder($columns, [$columns[$request->order[0]['column']], $request->order[0]['dir']]);
+            $emps = $this->repo->with(['department'])->allWithOrder($columns, $orderBy = [$columns[$request->order[0]['column']], $request->order[0]['dir']]);
         }
         // dd(DB::getQueryLog());
+        // dd($emps);
 
         // Get total records before apply limit
         $count = $emps->count();
@@ -58,7 +60,8 @@ class EmployeeController extends ApiController
 
         $data = [];
         foreach ($emps as $key => $item) {
-            $data[] = array_values($item->toArray());
+            $arr = $item->toArray();
+            $data[] = [$arr["id"], $arr["first_name"], $arr["last_name"], @$item->department->name, $arr["id"]];
         }
         $recordsTotal = $count;
         $recordsFiltered = $recordsTotal;
@@ -82,7 +85,7 @@ class EmployeeController extends ApiController
      */
     public function create()
     {
-        //
+        return view('admin.employees.create');
     }
 
     /**
@@ -93,7 +96,27 @@ class EmployeeController extends ApiController
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $rules = [
+            "first_name" => "required|min:3",
+            "last_name" => "required|min:3",
+            "phone_number" => "required",
+            "email" => "required|email|unique:employees",
+            "hire_date" => "required|date",
+            "salary" => "required|numeric",
+            "job_id" => "required|numeric",
+            "department_id" => "required|numeric",
+            "password" => "required|min:6",
+            "password_confirm" => "required|min:6|same:password",
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors())->withInput();
+        }
+
+        dd($request->all());
+
     }
 
     /**
@@ -138,6 +161,10 @@ class EmployeeController extends ApiController
      */
     public function destroy(Employee $employee)
     {
-        dd($employee);
+        $employee->roles()->detach();// delete roles
+        if (Employee::destroy($employee->id)) {
+            return $this->respond(['status' => 'success']);
+        }
+        return $this->setStatusCode(500)->respondWithErrors(['Error Occurred!']);
     }
 }

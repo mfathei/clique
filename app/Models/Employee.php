@@ -19,6 +19,12 @@ class Employee extends Authenticatable
         'password', 'remember_token',
     ];
 
+    // Dynamic attribute full_name
+    public function getFullNameAttribute()
+    {
+        return $this->attributes['first_name'] .' '. $this->attributes['last_name'];
+    }
+
     /**
      * The roles that belong to the user.
      */
@@ -54,6 +60,6 @@ class Employee extends Authenticatable
 
     public function department()
     {
-        return $this->belongsTo('App\Models\Department', 'department_id');
+        return $this->belongsTo('App\Models\Department', 'department_id', 'id');
     }
 }

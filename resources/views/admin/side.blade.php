@@ -28,10 +28,10 @@
                             <i class="icon-home"></i>
                             Dashboard</a>
                     </li>
-                    <li>
-                        <a href="ecommerce_orders.html">
-                            <i class="icon-basket"></i>
-                            Orders</a>
+                    <li id="employees-create">
+                        <a href="{{ route('employees.create') }}">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Create Employee</a>
                     </li>
                     <li>
                         <a href="ecommerce_orders_view.html">
