@@ -29,11 +29,11 @@
                 </li>
             </ul>
             <!-- END PAGE BREADCRUMB -->
+            <!-- END PAGE HEADER-->
+            @include('admin.error')
             <div class="pull-right" style="margin-bottom: 5px;">
                 <a class="btn btn-primary" href="{{ route('employees.create') }}" title="Create New Employee">Add Employee</a>
             </div>
-            <!-- END PAGE HEADER-->
-            @include('admin.error')
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
                 <div class="col-xs-12">
@@ -115,7 +115,8 @@
                                 <form class="hidden" id="form${row[0]}" method="post" action="/employees/${row[0]}/edit">
                                     <input type="hidden" name="_token" value="${MYJS.getToken()}">
                                 </form>
-                                &nbsp;<a href="javascript: document.querySelector('#form${row[0]}').submit();" title="Edit employee"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                <!-- &nbsp;<a href="javascript: document.querySelector('#form${row[0]}').submit();" title="Edit employee"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> --!>
+                                &nbsp;<a href="/employees/${row[0]}/edit" title="Edit employee"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                 &nbsp;<a href="javascript: confirmDelete('${row[0]}');" title="Delete employee"><i style="color: red" class="fa fa-times" aria-hidden="true"></i></a>
                                 `;
                         }

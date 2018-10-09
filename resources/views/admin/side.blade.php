@@ -33,11 +33,13 @@
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             Create Employee</a>
                     </li>
-                    <li>
-                        <a href="ecommerce_orders_view.html">
+                    @if(isset($employee) and $employee != null)
+                    <li id="employees-edit">
+                        <a href="{{ route('employees.edit', $employee->id) }}">
                             <i class="icon-tag"></i>
-                            Order View</a>
+                            Update Employee</a>
                     </li>
+                    @endif
                     <li>
                         <a href="ecommerce_products.html">
                             <i class="icon-handbag"></i>

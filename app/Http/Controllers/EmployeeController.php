@@ -145,7 +145,7 @@ class EmployeeController extends ApiController
      */
     public function edit(Employee $employee)
     {
-        dd($employee);
+        return view('admin.employees.edit', ['employee' => $employee]);
     }
 
     /**
@@ -157,7 +157,31 @@ class EmployeeController extends ApiController
      */
     public function update(Request $request, Employee $employee)
     {
-        //
+        $employee_id = $employee->id;
+        $rules = [
+            "first_name" => "required|min:3",
+            "last_name" => "required|min:3",
+            "phone_number" => "required",
+            "email" => "required|email|unique:employees,email,$employee_id",
+            "hire_date" => "required|date",
+            "salary" => "required|numeric",
+            "job_id" => "required|numeric",
+            "department_id" => "required|numeric",
+        ];
+        try {
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return back()->withErrors($validator->errors())->withInput();
+            }
+            $request->salary = 'mahdy';
+            $request->password = Hash::make($request->password);
+            $emp = $employee->update($request->except(['_token']));
+            if ($emp !== null) {
+                return redirect('/employees')->with(['success' => 'Employee Updated Successfully!']);
+            }
+        } catch (\Exception $e) {
+            return back()->with(['error' => 'Exception occurred, see logs'])->withInput();
+        }
     }
 
     /**
