@@ -21,7 +21,7 @@ class CreateEmployeesTable extends Migration
             $table->string('email')->unique();
             $table->date('hire_date');
             $table->double('salary');
-            $table->float('commission_pct')->default(0);
+            $table->float('commission_pct')->nullable()->default(0);
             $table->unsignedInteger('job_id');
             $table->unsignedInteger('manager_id')->nullable();
             $table->unsignedInteger('department_id');

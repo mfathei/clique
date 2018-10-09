@@ -19,6 +19,21 @@ class Employee extends Authenticatable
         'password', 'remember_token',
     ];
 
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'phone_number',
+        'email',
+        'hire_date',
+        'salary',
+        'commission_pct',
+        'job_id',
+        'manager_id',
+        'department_id',
+        'email_verified_at',
+        'password',
+    ];
+
     // Dynamic attribute full_name
     public function getFullNameAttribute()
     {

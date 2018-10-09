@@ -33,6 +33,7 @@
                 <a class="btn btn-primary" href="{{ route('employees.create') }}" title="Create New Employee">Add Employee</a>
             </div>
             <!-- END PAGE HEADER-->
+            @include('admin.error')
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
                 <div class="col-xs-12">

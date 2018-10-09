@@ -8,6 +8,7 @@ use DB;
 use App\Models\Employee;
 use App\Repositories\Repository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeeController extends ApiController
 {
@@ -109,14 +110,20 @@ class EmployeeController extends ApiController
             "password" => "required|min:6",
             "password_confirm" => "required|min:6|same:password",
         ];
-
-        $validator = Validator::make($request->all(), $rules);
-        if ($validator->fails()) {
-            return back()->withErrors($validator->errors())->withInput();
+        try {
+            $validator = Validator::make($request->all(), $rules);
+            if ($validator->fails()) {
+                return back()->withErrors($validator->errors())->withInput();
+            }
+            $request->salary = 'mahdy';
+            $request->password = Hash::make($request->password);
+            $emp = Employee::create($request->except(['_token']));
+            if ($emp !== null) {
+                return redirect('/employees')->with(['success' => 'Employee Created Successfully!']);
+            }
+        } catch (\Exception $e) {
+            return back()->with(['error' => 'Exception occurred, see logs'])->withInput();
         }
-
-        dd($request->all());
-
     }
 
     /**

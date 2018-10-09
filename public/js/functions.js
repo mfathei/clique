@@ -1,5 +1,5 @@
 const MYJS = (function () {
-
+    'use strict';
     let token;
 
     function activateSideMenu(menu, submenu) {

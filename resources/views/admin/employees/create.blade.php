@@ -30,6 +30,7 @@
             </ul>
             <!-- END PAGE BREADCRUMB -->
             <!-- END PAGE HEADER-->
+            @include('admin.error')
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
                 <div class="col-xs-12">
@@ -38,45 +39,45 @@
                         <div class="form-group row">
                             <label for="" class="col-sm-2 control-label">First name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="first_name" class="form-control" placeholder="firstname" required minlength="3">
+                                <input type="text" name="first_name" value="{{ old('first_name') }}" class="form-control" placeholder="John" required minlength="3">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-2 control-label">Last name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="last_name" class="form-control" placeholder="lastname" required minlength="3">
+                                <input type="text" name="last_name" value="{{ old('last_name') }}" class="form-control" placeholder="Doe" required minlength="3">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-2 control-label">Phone number</label>
                             <div class="col-sm-10">
-                                <input type="text" name="phone_number" pattern="^\([0-9]{4}\)[\s-]{1}[0-9]{4}[\s-]{1}[0-9]{4}$" class="form-control" placeholder="(----) ---- ----" required>
+                                <input type="text" name="phone_number" value="{{ old('phone_number') }}" class="form-control" placeholder="(----) ---- ----" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" name="email" class="form-control" placeholder="test@example.com" required>
+                                <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="test@example.com" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="" class="col-sm-2 control-label">Hire date</label>
                             <div class="col-sm-10">
-                                <input type="text" name="hire_date" class="form-control" pattern="^[0-9]{0, 6}(\.?[0-9]{2})$" required>
+                                <input type="date" name="hire_date" value="{{ old('hire_date') }}" class="form-control" required>
                             </div>
                         </div>
                         <div class="row form-group">
                             <label for="" class="col-sm-2 control-label">Salary</label>
                             <div class="col-sm-4">
                                 <div class="input-group">
-                                    <input type="text" name="salary" class="form-control" pattern='[0-9]\{1, 6\}' placeholder="000000.00" required>
+                                    <input type="number" name="salary" value="{{ old('salary') }}" class="form-control" placeholder="000000" required>
                                     <span class="input-group-addon">$</span>
                                 </div>
                             </div>
                             <label for="" class="col-sm-2 control-label">Commission pct</label>
                             <div class="col-sm-4">
                                 <div class="input-group">
-                                    <input type="number" name="commission_pct" class="form-control" pattern="^[0-9]{0, 2}(\.?[0-9]{2})$" placeholder="00.00">
+                                    <input type="number" name="commission_pct" value="{{ old('commission_pct') }}" class="form-control" placeholder="00" required>
                                     <span class="input-group-addon">%</span>
                                 </div>
                             </div>
@@ -86,7 +87,7 @@
                             <div class="col-sm-10">
                                 <select name="job_id" id="job_id" class="form-control">
                                     @foreach(App\Models\Job::all() as $job)
-                                        <option value="{{ $job->id }}">{{ $job->title }}</option>
+                                        <option value="{{ $job->id }}" @if($job->id == old('job_id'))  selected @endif>{{ $job->title }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -97,7 +98,7 @@
                                 <select name="manager_id" id="manager_id" class="form-control">
                                     <option value="" selected>None</option>
                                     @foreach(App\Models\Employee::all() as $manager)
-                                        <option value="{{ $manager->id }}">{{ $manager->full_name }}</option>
+                                        <option value="{{ $manager->id }}" @if($manager->id == old('manager_id'))  selected @endif>{{ $manager->full_name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -107,7 +108,7 @@
                             <div class="col-sm-10">
                                 <select name="department_id" id="department_id" class="form-control">
                                     @foreach(App\Models\Department::all() as $department)
-                                        <option value="{{ $department->id }}">{{ $department->name }}</option>
+                                        <option value="{{ $department->id }}" @if($department->id == old('department_id'))  selected @endif>{{ $department->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -115,11 +116,11 @@
                         <div class="row form-group">
                             <label for="" class="col-sm-2 control-label">Password</label>
                             <div class="col-sm-4">
-                                <input type="password" name="password" class="form-control" required minlength="6">
+                                <input type="password" name="password" value="{{ old('password') }}" class="form-control" required minlength="6">
                             </div>
                             <label for="" class="col-sm-2 control-label">Password confirm</label>
                             <div class="col-sm-4">
-                                <input type="password" name="password_confirm" class="form-control" required minlength="6">
+                                <input type="password" name="password_confirm" value="{{ old('password_confirm') }}" class="form-control" required minlength="6">
                             </div>
                         </div>
                         <div class="row">
