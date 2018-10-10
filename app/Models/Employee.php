@@ -77,4 +77,14 @@ class Employee extends Authenticatable
     {
         return $this->belongsTo('App\Models\Department', 'department_id', 'id');
     }
+    
+    public function vacations()
+    {
+        return $this->hasMany('App\Models\Vacation', 'employee_id');
+    }
+    
+    public function approvedVacations()
+    {
+        return $this->hasMany('App\Models\Vacation', 'approved_by');
+    }
 }

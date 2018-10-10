@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AttendanceType;
+use App\Models\Vacation;
 use Illuminate\Http\Request;
 
-class AttendanceTypeController extends Controller
+class VacationController extends Controller
 {
     protected $repo;
     /**
      * Constructor
      */
-    public function __construct(AttendanceType $attendanceType)
+    public function __construct(Vacation $vacation)
     {
         $this->middleware('auth');
-        $this->repo = new Repository($attendanceType);
+        $this->repo = new Repository($vacation);
     }
     /**
      * Display a listing of the resource.
@@ -50,10 +50,10 @@ class AttendanceTypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\AttendanceType  $attendanceType
+     * @param  \App\Models\Vacation  $vacation
      * @return \Illuminate\Http\Response
      */
-    public function show(AttendanceType $attendanceType)
+    public function show(Vacation $vacation)
     {
         //
     }
@@ -61,10 +61,10 @@ class AttendanceTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\AttendanceType  $attendanceType
+     * @param  \App\Models\Vacation  $vacation
      * @return \Illuminate\Http\Response
      */
-    public function edit(AttendanceType $attendanceType)
+    public function edit(Vacation $vacation)
     {
         //
     }
@@ -73,10 +73,10 @@ class AttendanceTypeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\AttendanceType  $attendanceType
+     * @param  \App\Models\Vacation  $vacation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, AttendanceType $attendanceType)
+    public function update(Request $request, Vacation $vacation)
     {
         //
     }
@@ -84,10 +84,10 @@ class AttendanceTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\AttendanceType  $attendanceType
+     * @param  \App\Models\Vacation  $vacation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(AttendanceType $attendanceType)
+    public function destroy(Vacation $vacation)
     {
         //
     }
