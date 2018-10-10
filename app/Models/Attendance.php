@@ -10,4 +10,9 @@ class Attendance extends Model
     {
         return $this->belongsTo('App\Models\AttendenceType', 'type');
     }
+
+    public function employee()
+    {
+        return $this->belongsTo('App\Models\Employee', 'employee_id');
+    }
 }

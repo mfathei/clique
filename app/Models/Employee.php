@@ -87,4 +87,9 @@ class Employee extends Authenticatable
     {
         return $this->hasMany('App\Models\Vacation', 'approved_by');
     }
+    
+    public function attendances()
+    {
+        return $this->hasMany('App\Models\Attendance', 'approved_by');
+    }
 }

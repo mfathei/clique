@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(AttendanceTypeSeeder::class);
         $this->call(VacationTypeSeeder::class);
         $this->call(VacationSeeder::class);
+        $this->call(AttendanceSeeder::class);
     }
 }
