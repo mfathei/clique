@@ -8,7 +8,7 @@ class Attendance extends Model
 {
     public function attendanceType()
     {
-        return $this->belongsTo('App\Models\AttendenceType', 'type');
+        return $this->belongsTo('App\Models\AttendanceType', 'type');
     }
 
     public function employee()

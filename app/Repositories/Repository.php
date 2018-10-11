@@ -20,7 +20,7 @@ class Repository implements RepositoryInterface
     // Get all instances of model
     public function all(array $columns = ['*'])
     {
-        return $this->model->all($columns);
+        return $this->model->get($columns);
     }
 
     // Get all instances of model with limit

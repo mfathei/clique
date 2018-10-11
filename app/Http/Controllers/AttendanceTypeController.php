@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\AttendanceType;
+use App\Repositories\Repository;
+
 use Illuminate\Http\Request;
 
 class AttendanceTypeController extends Controller

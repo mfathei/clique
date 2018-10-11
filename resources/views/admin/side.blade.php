@@ -40,28 +40,19 @@
                             Update Employee</a>
                     </li>
                     @endif
-                    <li>
-                        <a href="ecommerce_products.html">
-                            <i class="icon-handbag"></i>
-                            Products</a>
-                    </li>
-                    <li>
-                        <a href="ecommerce_products_edit.html">
-                            <i class="icon-pencil"></i>
-                            Product Edit</a>
-                    </li>
                 </ul>
             </li>
-            <li class="">
+            <li id="attendance">
                 <a href="javascript:;">
                     <i class="icon-rocket"></i>
-                    <span class="title">Page Layouts</span>
+                    <span class="title">Attendance</span>
                     <span class="arrow"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li>
-                        <a href="layout_sidebar_reversed.html">
-                            <span class="badge badge-warning">new</span>Right Sidebar Page</a>
+                    <li id="attendance-dashboard">
+                        <a href="{{ route('attendance.index') }}">
+                            <i class="icon-home"></i>
+                            Dashboard</a>
                     </li>
                     <li>
                         <a href="layout_sidebar_fixed.html">
@@ -71,7 +62,7 @@
                         <a href="layout_sidebar_closed.html">
                             Sidebar Closed Page</a>
                     </li>
-                    <li class="active">
+                    <li>
                         <a href="layout_blank_page.html">
                             Blank Page</a>
                     </li>

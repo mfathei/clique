@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobHistory;
 use App\Repositories\Repository;
+
 use Illuminate\Http\Request;
 
 class JobHistoryController extends Controller

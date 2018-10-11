@@ -24,8 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/employees/{employee}/edit', 'EmployeeController@edit')->name('employees.edit');
     Route::post('/employees/{employee}/update', 'EmployeeController@update')->name('employees.update');
     Route::delete('/employees/{employee}/delete', 'EmployeeController@destroy')->name('employees.delete');
-});
 
+    Route::get('/attendance', 'AttendanceController@index')->name('attendance.index');
+});
 
 
 Auth::routes();

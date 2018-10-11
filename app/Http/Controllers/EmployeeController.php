@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Api\ApiController;
-use Validator;
-use DB;
 use App\Models\Employee;
 use App\Repositories\Repository;
+
+use Validator;
+use DB;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 

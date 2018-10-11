@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\VacationType;
+use App\Repositories\Repository;
+
 use Illuminate\Http\Request;
 
 class VacationTypeController extends Controller

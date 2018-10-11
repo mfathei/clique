@@ -17,7 +17,7 @@
             <!-- BEGIN PAGE BREADCRUMB -->
             <ul class="page-breadcrumb breadcrumb">
                 <li>
-                    <a href="index.html">Home</a>
+                    <a href="{{ route('/') }}">Home</a>
                     <i class="fa fa-circle"></i>
                 </li>
                 <li>
@@ -37,7 +37,7 @@
             <!-- BEGIN PAGE CONTENT-->
             <div class="row">
                 <div class="col-xs-12">
-                    <table class="table table-bordered-table-striped" id="employees-table" width="100%">
+                    <table class="table table-bordered table-striped" id="employees-table" width="100%">
                         <thead>
                             <tr>
                                 <th>ID</th>

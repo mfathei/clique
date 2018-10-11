@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Employee;
+use App\Repositories\Repository;
+
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -22,9 +25,46 @@ class AttendanceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $month = date('m');// current month
+        $monthName = date('F');
+        $lastDay = date('t');
+        $currentYear = date('Y');
+        $headers = [$monthName];
+        $firstRow = ['EMPLOYEE NAME'];
+        $rows = [];
+        $emptyRow = [''];
+        if (isset($request->month)) {
+            $month = $request->month;
+        }
+
+        for ($i = 1; $i <= $lastDay; $i++) {
+            $headers[] = date('D', mktime(0, 0, 0, $month, $i, $currentYear));
+            $firstRow[] = $i;
+            $emptyRow[] = '';
+        }
+
+        // dd($headers);
+        $this->repo->setModel(new Employee);
+        $data = $this->repo->with(
+                ['attendances' => function ($q) use ($month) {
+                    $q->whereMonth('date', '=', $month)->with('attendanceType');
+                }]
+            )->all();
+
+        foreach($data as $k => $value){
+            $row = $emptyRow;
+            $row[0] = $value->full_name;
+            foreach($value->attendances as $att){
+                $d = date('j', strtotime($att->date));
+                $row[$d] = $att->AttendanceType->name;
+            }
+            $rows[] = $row;
+        }
+
+        // dd($rows);
+        return view('admin.attendance.calendar', ['headers' => $headers, 'firstRow' => $firstRow, 'rows' => $rows]);
     }
 
     /**
@@ -40,7 +80,7 @@ class AttendanceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,7 +91,7 @@ class AttendanceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Attendance  $attendance
+     * @param  \App\Models\Attendance $attendance
      * @return \Illuminate\Http\Response
      */
     public function show(Attendance $attendance)
@@ -62,7 +102,7 @@ class AttendanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Attendance  $attendance
+     * @param  \App\Models\Attendance $attendance
      * @return \Illuminate\Http\Response
      */
     public function edit(Attendance $attendance)
@@ -73,8 +113,8 @@ class AttendanceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Attendance  $attendance
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Attendance   $attendance
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Attendance $attendance)
@@ -85,7 +125,7 @@ class AttendanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Attendance  $attendance
+     * @param  \App\Models\Attendance $attendance
      * @return \Illuminate\Http\Response
      */
     public function destroy(Attendance $attendance)
