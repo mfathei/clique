@@ -17,6 +17,15 @@
     content: 'W';
 }
 
+.Vacation {
+    background-color: #F69200;
+    color: white;
+}
+
+#attendance-table td.Vacation:before {
+    content: 'V';
+}
+
 td {
     width: 50px;
     height: 50px;
@@ -92,7 +101,7 @@ td {
                             @foreach($rows as $row)
                                 <tr>
                                     @foreach($row as $d)
-                                        <td class="{{ $d }}" data-content="{{ $d }}"></td>
+                                        <td class="{{ $d }}" data-content="{{ $d }}" title="{{ $d }}"></td>
                                     @endforeach
                                 </tr>
                             @endforeach

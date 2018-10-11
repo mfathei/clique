@@ -48,17 +48,35 @@ class AttendanceController extends Controller
         // dd($headers);
         $this->repo->setModel(new Employee);
         $data = $this->repo->with(
-                ['attendances' => function ($q) use ($month) {
-                    $q->whereMonth('date', '=', $month)->with('attendanceType');
-                }]
-            )->all();
+            ['attendances' => function ($q) use ($month) {
+                $q->whereMonth('date', '=', $month)->with('attendanceType');
+            }]
+        )->with(
+            ['vacations' => function ($q) use ($month) {
+                $q->whereMonth('start_date', '=', $month)
+                    ->orWhereMonth('end_date', '=', $month);
+            }]
+        )->all();
 
-        foreach($data as $k => $value){
+        // dd($data);
+        foreach ($data as $k => $value) {
             $row = $emptyRow;
             $row[0] = $value->full_name;
-            foreach($value->attendances as $att){
+            foreach ($value->attendances as $att) {
                 $d = date('j', strtotime($att->date));
                 $row[$d] = $att->AttendanceType->name;
+            }
+
+            foreach ($value->vacations as $vacation) {
+                $start = strtotime($vacation->start_date);
+                $end = strtotime($vacation->end_date);
+                while ($start <= $end) {
+                    if (date('m', $start) == $month) {
+                        $d = date('j', $start);
+                        $row[$d] = 'Vacation';
+                    }
+                    $start += 86400;// add 24 hours to get the next day
+                }
             }
             $rows[] = $row;
         }
