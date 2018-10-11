@@ -46,6 +46,19 @@ td {
     color: white;
 }
 
+#attendance-table .first-row:nth-child(1) {
+    background-color: #7F7F7F;
+    font-weight: bold;
+    color: white;
+}
+
+#attendance-table thead>tr>th:nth-child(1) {
+    background-color: #316886;
+    font-weight: bold;
+    color: white;
+    text-transform: UPPERCASE;
+}
+
 </style>
 
 @endsection
