@@ -2,5 +2,5 @@
 
 return [
     'E-Mail Address' => 'Username or E-Mail Address',
-    'website-title' => 'iCliQue | HR'
+    'website-title' => '1CliQue | HR'
 ];
