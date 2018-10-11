@@ -2196,6 +2196,7 @@
 @endsection
 @section('scripts')
     <script>
+		MYJS.activateSideMenu('dashboard');
         // import example-component from './components/ExampleComponent.vue';
         const vu = new Vue({
             el: '#app',

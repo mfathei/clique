@@ -4,9 +4,17 @@
 
 <style media="screen">
 
+#attendance-table td:before {
+    content: attr(data-content);
+}
+
 .Work {
     background-color: #418AB3;
     color: white;
+}
+
+#attendance-table td.Work:before {
+    content: 'W';
 }
 
 td {
@@ -84,7 +92,7 @@ td {
                             @foreach($rows as $row)
                                 <tr>
                                     @foreach($row as $d)
-                                        <td class="{{ $d }}" >{{ $d }}</td>
+                                        <td class="{{ $d }}" data-content="{{ $d }}"></td>
                                     @endforeach
                                 </tr>
                             @endforeach
