@@ -3,7 +3,7 @@
     <div class="page-header-inner">
         <!-- BEGIN LOGO -->
         <div class="page-logo">
-            <a href="index.html">
+            <a href="{{ route('/') }}">
                 <img src="{{ url("/images/logo.png") }}" alt="logo" class="logo-default"/>
             </a>
             <div class="menu-toggler sidebar-toggler">
