@@ -21,3 +21,28 @@ To run it follow these steps:<br>
         username or email: LDEHAAN<br/>
         password: password<br/>
 </pre>
+
+
+I added docker to run this app
+`sudo systemctl start docker`
+`sudo docker build --file .docker/Dockerfile -t iclique .`
+`sudo docker images`
+`sudo chmod -R o+rw bootstrap/ storage/`
+`sudo docker run --name iclique --rm -p 8989:80 iclique`
+now u can open http://127.0.0.1:8989/
+`sudo docker ps`
+`composer require predis/predis`
+
+
+final steps to run :
+`sudo docker build --file .docker/Dockerfile -t iclique .`
+`sudo docker-compose up --build`
+`sudo docker-compose up `
+`sudo docker-compose exec app /bin/bash`
+`cd /srv/app`
+`php artisan migrate`
+`php artisan db:seed`
+open http://127.0.0.1:8989/ and login
+
+u can connect to mysql db on docker using workbench:
+see Screenshot_2018-10-30_12-47-34.png

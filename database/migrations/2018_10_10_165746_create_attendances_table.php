@@ -17,8 +17,8 @@ class CreateAttendancesTable extends Migration
             $table->increments('id');
             $table->date('date');
             $table->unsignedInteger('employee_id');
-            $table->timestamp('check_in');
-            $table->timestamp('check_out');
+            $table->timestamp('check_in')->nullable();
+            $table->timestamp('check_out')->nullable();
             $table->unsignedInteger('type');
             $table->timestamps();
 
