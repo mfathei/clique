@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\Employee;
 use App\Repositories\Repository;
-
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -27,7 +26,7 @@ class AttendanceController extends Controller
      */
     public function index(Request $request)
     {
-        $month = date('m');// current month
+        $month = date('m'); // current month
         $monthName = date('F');
         $lastDay = date('t');
         $currentYear = date('Y');
@@ -75,7 +74,7 @@ class AttendanceController extends Controller
                         $d = date('j', $start);
                         $row[$d] = 'Vacation';
                     }
-                    $start += 86400;// add 24 hours to get the next day
+                    $start += 86400; // add 24 hours to get the next day
                 }
             }
             $rows[] = $row;
